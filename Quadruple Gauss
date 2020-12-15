@@ -1,0 +1,30 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+
+int main(void) {
+	int i, n, Q1, Q2, SUM;
+
+	printf("Quadruple Gauss equation sum of integers N to the power of 4\n");
+	printf("Example: 1^4 + 2^4 + ....\n");
+	printf("Enter integer N (must be greater than 1) : ");
+	scanf_s("%d", &n);
+
+	if ( n<=1){
+		printf("\nPlease enter integer N greater than 1\n\n");
+		main();
+	}
+
+	else {
+		for (i = 1; i <= (n-1); i++) {
+			Q1 = 1; 
+			Q2 = pow((i + 1), 4);
+			SUM = Q1 + Q2;
+		}
+	}
+
+	printf("Total sum to integer N is %d\n", SUM);
+
+	_getch();
+	return 0;
+}
