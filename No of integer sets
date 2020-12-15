@@ -1,0 +1,22 @@
+#include<stdio.h> 
+#include<math.h> 
+ 
+    int main(void){ 
+    int x, y, z, count = 0; 
+     
+    printf("For the following expressions:\n"); 
+    printf("|x|+2|y|+5|z|=18 and xyz>0\n"); 
+     
+    for(x=0; x<18; x++){ 
+        for(y=0; y<18; y++){ 
+            for(z=0; z<18; z++){ 
+                if (fabs(x) + 2*fabs(y) + 5*fabs(z) == 18 && x*y*z>0){ 
+                    count++; 
+                } 
+            } 
+        } 
+    } 
+    /*To include negative integers as well in the set that satisfy x*y*z>0, there are 4 possible arrangements for each x, y or z*/ 
+    printf("The number of integer sets that satisfy that above expressions simultaneously are %d.\n", 4*count); 
+    return 0; 
+}
