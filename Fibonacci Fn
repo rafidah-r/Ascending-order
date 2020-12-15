@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<conio.h>
+
+int main(void) {
+	int n, T0, T1, T2, T3, i, nextT;
+
+	printf("Fibonacci number Fn\n");
+	printf("Fn = F1 + F2 + F3 +...\n");
+	printf("Enter F1 : ");
+	scanf_s("%d", &T1);
+	printf("Enter F2 : ");
+	scanf_s("%d", &T2); 
+	printf("Enter F3 : ");
+	scanf_s("%d", &T3);
+	printf("Input n : ");
+	scanf_s("%d", &n);
+
+	if (n == 0) {
+		T0 = 0;
+		printf("F%d = %d\n", n, T0);
+	}
+
+	else {
+		for (i = 4; i <= n; i++) {
+			nextT = T1 + T2 + T3;
+			T1 = T2;
+			T2 = T3;
+			T3 = nextT;
+		}
+		printf("F%d = %d\n", n, nextT);
+	}
+
+	_getch();
+	return 0;
+}
