@@ -1,0 +1,133 @@
+#include <stdio.h>
+#include <math.h>
+
+void printpoly(double *z, int n){
+    int i=1;
+    while(i<=n-1){
+        if(z[i]!=0.){
+            if(z[i]==1.){
+                if(i==1){
+                    printf(" + x");
+                }
+                else if(i>1){
+                    printf(" + x^%d", i);
+                }
+                else printf("%.f", z[i]);
+            }
+            else if(z[i]==-1.){
+                if(i==1){
+                    printf(" - x");
+                }
+                else if(i>1){
+                    printf(" - x^%d", i);
+                }
+                else {
+                    printf("%.f", z[i]);
+                }
+            }
+            else if(z[i]>1.){
+                if(i==1){
+                    printf("+ %.fx", z[i]);
+                } else{
+                    printf(" + %.fx^%d", z[i], i);
+                }
+            }
+            else if(z[i]<-1.){
+                    printf(" %.fx^%d", z[i], i);
+                }
+            else{
+                printf("");
+            }
+            i++;
+        }
+    }
+}
+
+void polyadd(double *x, double *y, double *z, int n){
+    int i;
+    for(i=0; i<=n; i++){
+        z[i]=x[i]+y[i];
+    }
+    if (z[0]==0.){
+        printf("f(x) + g(x) = ");
+    }
+    else {
+        printf("f(x) + g(x) = %.f", z[0]);
+    }
+    printpoly(z, n);
+    printf("\n");
+}
+
+void polysub(double *x, double *y, double *z, int n){
+    int i;
+    for(i=0; i<=n; i++){
+        z[i]=x[i]-y[i];
+    }
+    if (z[0]==0.){
+        printf("f(x) - g(x) = ");
+    }
+    else {
+        printf("f(x) - g(x) = %.f", z[0]);
+    }
+    printpoly(z, n);
+    printf("\n");
+}
+
+void polymul(double *x, double *y, double *z, int m, int n){
+    int i, j, k;
+    //Initialize product polynomial
+    for (i=0; i<(m+n); i++){
+        z[i] = 0;
+    }
+    for (k=0; k<(m+n); k++){
+        k++;
+    }
+    //Multiply two polynomials term by term
+    //Take every term of first polynomial
+    for (i=0; i<m; i++){
+        //Multiply the current term of first polynomial with every term of second polynomial
+        for (j=0; j<n; j++)
+            z[i+j] = z[i+j] + (x[i]*y[j]);
+    }
+    printf("f(x) * g(x) = ");
+    printpoly(z, k);
+    printf("\n");
+}
+
+int main(void){
+    int i, j, m, n;
+    double a[] = {1., 2., 3.};
+    double b[] = {0., 3., 2., 1.};
+    double z[50];
+    m = sizeof(a)/sizeof(a[0]);
+    n = sizeof(b)/sizeof(b[0]);
+
+    if (a[0]==0.){
+        printf("f(x) =  ");
+    }
+    else{
+        printf("f(x) = %.f", a[0]);
+    }
+    printpoly(a, m);
+    printf("\n");
+
+    if (b[0]==0.){
+        printf("g(x) = ");
+    }
+    else{
+        printf("g(x) = %.f", b[0]);
+    }
+    printpoly(b, n);
+    printf("\n");
+
+    if(n<m){
+        polyadd(a,b,z,m);
+        polysub(a,b,z,m);
+    }
+    else{
+        polyadd(a,b,z,n);
+        polysub(a,b,z,n);
+    }
+    polymul(a,b,z,m,n);
+    return 0;
+}
