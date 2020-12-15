@@ -1,0 +1,26 @@
+#include<stdio.h>
+#include<conio.h>
+
+
+int main(void) {
+	int i, A, S1, count, n;
+
+	printf("For the following equation:\n");
+	printf("S = 1n + 2(n-1) + 3(n-2) + ... + 2(n-1) + 1n\n");
+	printf("Input S: ");
+	scanf_s("%d", &A);
+
+	for (i = 1; ; i++) {
+		S1 = i * (i + 1)*(i + 2) / 3;
+		count++;
+		if (S1 > A) {
+			n = count - 1;
+			break;
+		}
+	}
+
+	printf("The largest n is %d\n", n);
+
+	_getch();
+	main();
+}
