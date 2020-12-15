@@ -1,0 +1,153 @@
+#include <stdio.h>
+#include <math.h>
+
+//"coeff" is coefficient
+//"exp" is exponential
+//length is length of polynomial
+struct poly a, b, x, y, z;
+
+struct poly{
+    int length, exp[10];
+    double coeff[10];
+};
+
+void printpoly(struct poly z, int n){
+    int i=1;
+    while(i<=n-1){
+        if(z.coeff[i]!=0.){
+            if(z.coeff[i]==1.){
+                if(i==1){
+                    printf(" + x");
+                }
+                else if(i>1){
+                    printf(" + x^%d", i);
+                }
+                else printf("%.f", z.coeff[i]);
+            }
+            else if(z.coeff[i]==-1.){
+                if(i==1){
+                    printf(" - x");
+                }
+                else if(i>1){
+                    printf(" - x^%d", i);
+                }
+                else {
+                    printf("%.f", z.coeff[i]);
+                }
+            }
+            else if(z.coeff[i]>1.){
+                if(i==1){
+                    printf("+ %.fx", z.coeff[i]);
+                } else{
+                    printf(" + %.fx^%d", z.coeff[i], i);
+                }
+            }
+            else if(z.coeff[i]<-1.){
+                    printf(" %.fx^%d", z.coeff[i], i);
+                }
+            else{
+                printf("");
+            }
+            i++;
+        }
+    }
+}
+
+void polyadd(struct poly x, struct poly y, struct poly z, int n){
+    int i;
+    for(i=0; i<=n; i++){
+        z.coeff[i]=x.coeff[i]+y.coeff[i];
+        z.exp[i]=y.exp[i];
+    }
+    if (z.coeff[0]==0.){
+        printf("f(x) + g(x) = ");
+    }
+    else {
+        printf("f(x) + g(x) = %.f", z.coeff[0]);
+    }
+    printpoly(z, n);
+    printf("\n");
+}
+
+void polysub(struct poly x, struct poly y, struct poly z, int n){
+    int i;
+    for(i=0; i<=n; i++){
+        z.coeff[i]=x.coeff[i]-y.coeff[i];
+        z.exp[i]=y.exp[i];
+    }
+    if (z.coeff[0]==0.){
+        printf("f(x) - g(x) = ");
+    }
+    else {
+        printf("f(x) - g(x) = %.f", z.coeff[0]);
+    }
+    printpoly(z, n);
+    printf("\n");
+}
+
+void polymul(struct poly x, struct poly y, struct poly z, int m, int n){
+    int i, j, k;
+    //Initialize product polynomial
+    for (i=0; i<(m+n); i++){
+        z.coeff[i] = 0;
+    }
+    for (k=0; k<(m+n); k++){
+        k++;
+    }
+    //Multiply two polynomials term by term
+    //Take every term of first polynomial
+    for (i=0; i<m; i++){
+        //Multiply the current term of first polynomial with every term of second polynomial
+        for (j=0; j<n; j++)
+            z.coeff[i+j] = z.coeff[i+j] + (x.coeff[i]*y.coeff[j]);
+    }
+    printf("f(x) * g(x) = ");
+    printpoly(z, k);
+    printf("\n");
+}
+
+int main (void){
+    int i, length;
+    a.length=3;
+    b.length=4;
+    z.length=6;
+
+    //Declaring array of coefficient of a=f(x) and b=g(x)
+    a.coeff[0]=1.;
+    a.coeff[1]=2.;
+    a.coeff[2]=3.;
+
+    b.coeff[0]=0.;
+    b.coeff[1]=3.;
+    b.coeff[2]=2.;
+    b.coeff[3]=1.;
+
+    if (a.coeff[0]==0.){
+        printf("f(x) =  ");
+    }
+    else{
+        printf("f(x) = %.f", a.coeff[0]);
+    }
+    printpoly(a, a.length);
+    printf("\n");
+
+    if (b.coeff[0]==0.){
+        printf("g(x) = ");
+    }
+    else{
+        printf("g(x) = %.f", b.coeff[0]);
+    }
+    printpoly(b, b.length);
+    printf("\n");
+
+    if(b.length<a.length){
+        polyadd(a,b,z,a.length);
+        polysub(a,b,z,a.length);
+    }
+    else{
+        polyadd(a,b,z,b.length);
+        polysub(a,b,z,b.length);
+    }
+    polymul(a,b,z,a.length,b.length);
+    return 0;
+}
