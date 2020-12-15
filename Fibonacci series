@@ -1,0 +1,20 @@
+#include <stdio.h>
+#include <conio.h>
+
+int main(void) {
+	
+	int i, n, T1=0, T2=1, nextT;
+
+	printf("Enter the number of terms: ");
+	scanf_s("%d", &n);
+
+	printf("Fibonacci Series: ");
+
+	for (i = 1; i <= n; i++) {
+		printf("%d\t ", T1);
+		nextT = T1 + T2;
+		T1 = T2;
+		T2 = nextT;
+	}
+	_getch();
+	retu
