@@ -1,0 +1,111 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<stdlib.h>
+#include<math.h>
+
+void plot_graph(int y) {
+	int i;
+	for (i = 0; i <= y; i++) {
+		printf(" ");
+	}
+	printf("*\n");
+	return;
+}
+int main(void) {
+	int n = 0;
+	char putin[20];
+	char h[20];
+	char input[20];
+
+		printf("\n");
+		printf("Press 1 to show all commands\n");
+		scanf_s("%s", input, 20);
+
+		if (strcmp("1", input) == 0) {
+			printf("Select commands from below:\n");
+			printf("Type s for sine waves\n");
+			printf("Type F for Fibonacci number Fn\n");
+			printf("Type n for judging Z as Fibonacci number\n");
+			printf("Type S for subtraction of whole numbers\n");
+			printf("Type x to exit program\n\n\n");
+		}
+		scanf_s("%s", input, 20);
+		//Sine wave generator
+		if (strcmp("s", input) == 0) {
+				int n;
+				double m, x, y, Pi = 3.14159;
+
+				printf("Sine wave generator\n");
+				printf("Input desired number of '*': ");
+				scanf_s("%d", &n);
+
+				m = 2 * Pi / (n-1);
+
+				for (x = -Pi; x <= Pi; x += m) {
+					y = 20 * sin(x) + 20;
+					plot_graph(y);
+						}
+				main();
+		}
+		//Fibonacci series
+		else if (strcmp("F", input) == 0) {
+				int i, n, T1 = 0, T2 = 1, nextT;
+
+				printf("Enter the number of terms: ");
+				scanf_s("%d", &n);
+
+				printf("Fibonacci Series: ");
+
+				for (i = 1; i <= n; i++) {
+					printf("%d\t ", T1);
+					nextT = T1 + T2;
+					T1 = T2;
+					T2 = nextT;
+				}
+				main();
+		}
+		//Z fibonacci number
+		else if (strcmp("n", input) == 0) {
+				int z, x, y, n;
+				double  a, b;
+
+				printf("To determine whether Z is a Fibonacci number;\n");
+				printf("Input a positive integer Z: ");
+				scanf_s("%d", &z);
+
+				n = z * z;
+				a = sqrt(5 * n + 4);
+				b = sqrt(5 * n - 4);
+				x = (int)a;
+				y = (int)b;
+
+				if (x == a)
+					printf("Result: %d is a Fibonacci number", z);
+				else if (y == b)
+					printf("Result: %d is a Fibonacci number", z);
+				else
+					printf("Result: %d is not a Fibonacci number", z);
+				main();
+		}
+		//Subtraction
+		else if (strcmp("S", input) == 0) {
+			int A, B;
+			printf("Input two whole numbers to substract (A-B)\n");
+			scanf_s("%d %d", &A, &B);
+			printf("The substraction result is %d", A - B);
+			main();
+		}
+		//exit
+		else if (strcmp("x", input) == 0) {
+			return 0;
+		}
+		//error
+		else if (strcmp("1", input) != 0 && strcmp("s", input) != 0 && strcmp("F", input) != 0 && strcmp("n", input) != 0 && strcmp("S", input) != 0) {
+			printf("Please input the correct commmand key\n");
+			main();
+		}
+
+	_getch();
+
+}
