@@ -1,0 +1,9 @@
+#include<stdio.h> 
+int main(void){ 
+    double a; 
+ 
+    printf("Input a real number: ", a); 
+    scanf("%lf", &a); 
+    printf("The nearest integer is: %d\n", (int)(a+0.5)); 
+    return 0; 
+} 
