@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<conio.h>
+
+int main() {
+		double p;
+		int q;
+
+		printf("Input a positive number including the decimals: ");
+		scanf_s("%lf", &p);
+
+		q = (int)(p + 0.5) * 1;
+		q = q / 1;
+
+		printf("Result after rounding off: %d\n", q);
+		printf("\n");
+		_getch();
+		main();
+}
