@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<math.h>
+#include<conio.h>
+
+int main(void) {
+	int z, x, y, n;
+	double  a, b; 
+
+	printf("To determine whether Z is a Fibonacci number;\n");
+	printf("Input a positive integer Z: ");
+	scanf_s("%d", &z);
+	
+	n = z * z;
+	a = sqrt(5 * n + 4);
+	b = sqrt(5 * n - 4);
+	x = (int) a;
+	y = (int) b;
+	
+	if (x == a)
+		printf("Result: %d is a Fibonacci number", z);
+	else if (y == b)
+		printf("Result: %d is a Fibonacci number", z);
+	else
+		printf("Result: %d is not a Fibonacci number", z);
+	_getch();
+	return 0;
+}
