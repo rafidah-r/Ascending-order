@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<conio.h>
+#include<math.h>
+
+struct complex {
+	double real;
+	double imag;
+};
+
+int main(void) {
+	struct complex a, b, c;
+	double x, y;
+	double m, z, arg;
+
+	printf("Enter a and b where a + ib is the first complex number.\n");
+	scanf_s("%lf %lf", &a.real, &a.imag);
+	printf("Enter c and d where c + id is the second complex number.\n");
+	scanf_s("%lf %lf", &b.real, &b.imag);
+
+	c.real = a.real + b.real;
+	c.imag = a.imag + b.imag;
+	x = c.real;
+	y = c.imag;
+
+	m = sqrt(x*x + y*y);
+	z = fabs(m);
+	arg = atan(c.imag / c.real);
+
+	printf("Sum of the complex numbers: %d + %di\n", c.real, c.imag);
+	printf("Absolute value of the sum: %.6f\n", z);
+	printf("Argument: %.6f", arg);
+
+	_getch();
+	return 0;
+}
