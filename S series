@@ -1,0 +1,19 @@
+#include<stdio.h>
+#include<conio.h>
+
+int main(void) {
+	int n, S;
+
+	printf("For the following equation:\n");
+	printf("S = 1n + 2(n-1) + 3(n-2) + ... + 2(n-1) + 1n\n");
+	printf("Input n: ");
+	scanf_s("%d", &n);
+
+//	S series can be calculated using the formula f(n) = n(n+1)(n+2)/3
+	S = n * (n + 1)*(n + 2) / 3;
+	
+	printf("S = %d\n", S);
+
+	_getch();
+	main();
+}
