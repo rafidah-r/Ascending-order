@@ -1,0 +1,81 @@
+#include<stdio.h>
+#include<conio.h>
+#include<string.h>
+#include<math.h>
+
+#define MAX_DATA_SIZE 50
+
+int x[MAX_DATA_SIZE];
+double y[MAX_DATA_SIZE];
+
+void load_xy_data() {
+	FILE *fp;
+	char filename[20];
+	char nameflag = 1;
+	int i;
+	double data_x, data_y;
+
+	do {
+		printf("Enter filename: ");
+		scanf_s("%s", filename, 20);
+		if (strlen(filename) > 8) {
+			printf("Filename is too long.\n");
+			nameflag = 1;
+		}
+		else {
+			strcat_s(filename, ".CSV");
+			if (fopen_s(&fp, filename, "r") != 0) {
+				printf("File can't be opened");
+				nameflag = 1;
+			}
+			else {
+				nameflag = 0;
+			}
+		}
+	} while (nameflag);
+
+	fscanf_s(fp, "x,y\n");
+	for (i = 0; i < 6; i++) {
+		fscanf_s(fp, "%lf,%lf\n", &data_x, &data_y);
+		x[i] = data_x;
+		y[i] = data_y;
+	}
+	fclose(fp);
+	printf("File successfully read.\n");
+}
+
+void lin_regress(){
+	int i = 0, n = 10;
+	double a, b, c, d = 0, e = 0 , f, g, a1 = 0, b1 = 0, A, B, G, g1 = 0, p, q, r, R;
+
+	for (i = 0; i < 6; i++) {
+		a = x[i] * x[i];
+		b = x[i] * y[i];
+		g = y[i] * y[i];
+		c = x[i] + d;	//sum of x
+		d = x[i];		//change d to the previous x
+		f = y[i] + e;	//sum of y
+		e = y[i];		//change e to the previous y
+		A = a1 + a;	//sum of squared x
+		a1 = a;
+		B = b1 + b;	//sum of product of x and y
+		b1 = b;
+		G = g1 + g; //sum of squared y
+		g1 = g;
+	}
+	p = (f*A - c * B) / (n*A - c * c);
+	q = (n*B - c * f) / (n*A - c * c);
+	r = (n*B - c * f) / sqrt(((n*A - c * c))*(n*G - f * f));
+
+	printf("The regression equation is y = %.6fx + %.6f\n", p, q);
+	printf("The coefficient of determination is %.6f\n", R = (r*r) * 100);
+}
+
+int main(void) {
+
+	load_xy_data();
+	lin_regress();
+
+	_getch();
+	return(0);
+}
