@@ -1,0 +1,35 @@
+#include <stdio.h> 
+#include <stdlib.h>
+#include <time.h>
+#include <math.h> 
+
+int main(void){
+  int p, q, i, count = 0; 
+  double x, y, z, pi, e, error; 
+
+  /*i is number of points in 1st quadrant of circle*/ 
+  printf("Input the number of points (10^?): ", p); 
+  scanf("%d", &p); 
+
+  /*Initialize random numbers*/ 
+  q = pow(10,p); 
+
+  srand((unsigned) time(NULL)); 
+
+  for(i = 0; i < q; i++){ 
+    x = (double)rand()/RAND_MAX; 
+    y = (double)rand()/RAND_MAX; 
+    z = x*x + y*y; 
+
+    if (z<=1) count++; 
+  } 
+
+  pi = (double) count/q*4.0; 
+  e = pi - M_PI; 
+  error = fabs(e); 
+
+  printf("Measure of unit circle = %.10f\n", pi); 
+  printf("Error = %.10f\n", error); 
+
+  return 0; 
+} 
