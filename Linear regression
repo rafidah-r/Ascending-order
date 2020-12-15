@@ -1,0 +1,56 @@
+#include<stdio.h>
+#include<conio.h>
+#include<stdlib.h>
+#include<string.h>
+#include<math.h>
+
+//This program uses linear regression analysis
+//To find the linear regression equation in the form y = mx + c [where p = m and q = c]
+//and to find the coefficient of determination R [square of r in percentage %]
+//Reference: "trial for file"
+
+FILE *file;
+
+int main(void) {	
+	errno_t err;
+
+	//Open for read;
+	err = fopen_s(&file, "dataset.csv", "r");
+	if (err == 0) {
+		printf("The file 'dataset.csv' was opened\n");
+		
+		int i, n=10;
+		double x, y, a, b, c, d = 0, e = 0, f, g, a1 = 0, b1 = 0, A, B, G, g1 = 0, p, q, r, R;
+
+		for (i = 0; i <= n; i++) {
+			fscanf_s(file, "%lf\c %lf\c", &x, &y);
+			a = x * x;
+			b = x * y;
+			g = y * y;
+			c = x + d;	//sum of x
+			d = x;		//change d to the previous x
+			f = y + e;	//sum of y
+			e = y;		//change e to the previous y
+			A = a1 + a;	//sum of squared x
+			a1 = a;
+			B = b1 + b;	//sum of product of x and y
+			b1 = b;
+			G = g1 + g; //sum of squared y
+			g1 = g;
+		}
+		
+		p = (f*A - c * B) / (n*A - c * c);
+		q = (n*B - c * f) / (n*A - c * c);
+		r = (n*B - c * f) / sqrt(((n*A - c * c))*(n*G - f * f));
+
+		printf("The regression equation is y = %.6fx + %.6f\n", p, q);
+		printf("The coefficient of determination is %.6f\n", R = (r*r) * 100);
+		fclose(file);
+	}
+	else {
+		printf("The file was not found\n");
+	}
+
+	_getch();
+	return 0;
+}
